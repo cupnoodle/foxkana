@@ -113,6 +113,59 @@ Kana *questionKana;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)generateNextQuestion {
+    
+}
+
+- (void)prepareNextQuestion {
+    
+    //fade out all buttons and question label
+    for (UIView *view in self.view.subviews)
+    {
+        if([view isMemberOfClass:[UIButton class]])
+        {
+            [UIView animateWithDuration:0.25 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{view.alpha = 0.0;} completion: nil];
+        }
+    }
+    [UIView animateWithDuration:0.25 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 0.0;} completion: nil];
+    
+    
+}
+
+- (IBAction)answerButtonPressed:(id)sender {
+
+    if(![[sender currentTitle] isEqualToString: questionKana.reading])
+    {
+        [sender setBackgroundColor: [UIColor colorWithRed:0.633 green:0.100 blue:0.114 alpha:1.000]];
+        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)sender).alpha = 0.0;} completion: nil];
+    }
+
+    for (UIView *view in self.view.subviews)
+    {
+        if([view isMemberOfClass:[UIButton class]])
+        {
+            [(UIButton *)view setEnabled:NO];
+            
+            if([[(UIButton *)view currentTitle] isEqualToString: questionKana.reading])
+            {
+                //[(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
+                //[(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [UIView animateWithDuration:0.75 delay:0.25 options:UIViewAnimationOptionCurveLinear animations:^{[(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]]; [(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];} completion: nil];
+            }
+            else
+            {
+                [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)view).alpha = 0.0;} completion: nil];
+            }
+        }
+    }
+    
+    [self prepareNextQuestion];
+
+    
+    
+}
+
 /*
 #pragma mark - Navigation
 
