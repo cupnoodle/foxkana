@@ -25,13 +25,58 @@ Kana *questionKana;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    
     questionIndexes = [[NSMutableArray alloc] initWithCapacity:46];
     for(int i=1; i<=46; i++)
     {
         [questionIndexes addObject:[NSNumber numberWithInt:i]] ;
     }
     
-    // Do any additional setup after loading the view.
+    
+    //customize answer buttons
+    self.answer_1.layer.cornerRadius = 5;
+    self.answer_1.clipsToBounds = YES;
+    self.answer_1.layer.masksToBounds = NO;
+    self.answer_1.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.answer_1.layer.shadowOpacity = 0.5;
+    self.answer_1.layer.shadowRadius = 2;
+    self.answer_1.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    self.answer_2.layer.cornerRadius = 5;
+    self.answer_2.clipsToBounds = YES;
+    self.answer_2.layer.masksToBounds = NO;
+    self.answer_2.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.answer_2.layer.shadowOpacity = 0.5;
+    self.answer_2.layer.shadowRadius = 2;
+    self.answer_2.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    self.answer_3.layer.cornerRadius = 5;
+    self.answer_3.clipsToBounds = YES;
+    self.answer_3.layer.masksToBounds = NO;
+    self.answer_3.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.answer_3.layer.shadowOpacity = 0.5;
+    self.answer_3.layer.shadowRadius = 2;
+    self.answer_3.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    self.answer_4.layer.cornerRadius = 5;
+    self.answer_4.clipsToBounds = YES;
+    self.answer_4.layer.masksToBounds = NO;
+    self.answer_4.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.answer_4.layer.shadowOpacity = 0.5;
+    self.answer_4.layer.shadowRadius = 2;
+    self.answer_4.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    [self generateNextQuestion];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)generateNextQuestion {
     NSString *kanaRealmPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"kana.realm"];
     NSError *error;
     //[RLMRealm setDefaultRealmPath: kanaRealmPath];
@@ -74,73 +119,40 @@ Kana *questionKana;
     
     self.questionLabel.text = questionKana.hiragana;
     
-    //customize answer buttons
-    self.answer_1.layer.cornerRadius = 5;
-    self.answer_1.clipsToBounds = YES;
-    self.answer_1.layer.masksToBounds = NO;
-    self.answer_1.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.answer_1.layer.shadowOpacity = 0.5;
-    self.answer_1.layer.shadowRadius = 2;
-    self.answer_1.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    
-    self.answer_2.layer.cornerRadius = 5;
-    self.answer_2.clipsToBounds = YES;
-    self.answer_2.layer.masksToBounds = NO;
-    self.answer_2.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.answer_2.layer.shadowOpacity = 0.5;
-    self.answer_2.layer.shadowRadius = 2;
-    self.answer_2.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    
-    self.answer_3.layer.cornerRadius = 5;
-    self.answer_3.clipsToBounds = YES;
-    self.answer_3.layer.masksToBounds = NO;
-    self.answer_3.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.answer_3.layer.shadowOpacity = 0.5;
-    self.answer_3.layer.shadowRadius = 2;
-    self.answer_3.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    
-    self.answer_4.layer.cornerRadius = 5;
-    self.answer_4.clipsToBounds = YES;
-    self.answer_4.layer.masksToBounds = NO;
-    self.answer_4.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.answer_4.layer.shadowOpacity = 0.5;
-    self.answer_4.layer.shadowRadius = 2;
-    self.answer_4.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)generateNextQuestion {
     
 }
 
 - (void)prepareNextQuestion {
     
-    //fade out all buttons and question label
+    //fade in all buttons and question label
     for (UIView *view in self.view.subviews)
     {
         if([view isMemberOfClass:[UIButton class]])
         {
-            [UIView animateWithDuration:0.25 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{view.alpha = 0.0;} completion: nil];
+            [(UIButton *)view setEnabled:YES];
+            [(UIButton *)view setBackgroundColor:[UIColor whiteColor]];
+            [(UIButton *)view setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{view.alpha = 1.0;} completion: nil];
         }
     }
-    [UIView animateWithDuration:0.25 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 0.0;} completion: nil];
-    
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 1.0;} completion: nil];
+
     
 }
 
 - (IBAction)answerButtonPressed:(id)sender {
-
     if(![[sender currentTitle] isEqualToString: questionKana.reading])
     {
         [sender setBackgroundColor: [UIColor colorWithRed:0.633 green:0.100 blue:0.114 alpha:1.000]];
         [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)sender).alpha = 0.0;} completion: nil];
     }
-
+    else
+    {
+        [sender setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
+        [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
     for (UIView *view in self.view.subviews)
     {
         if([view isMemberOfClass:[UIButton class]])
@@ -149,9 +161,17 @@ Kana *questionKana;
             
             if([[(UIButton *)view currentTitle] isEqualToString: questionKana.reading])
             {
-                //[(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
-                //[(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                [UIView animateWithDuration:0.75 delay:0.25 options:UIViewAnimationOptionCurveLinear animations:^{[(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]]; [(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];} completion: nil];
+                
+                
+                [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{
+                    [(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
+                    [UIView transitionWithView:view duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        [(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    } completion:nil];
+                } completion: ^(BOOL finished){
+                    [UIView animateWithDuration:0.5 delay:1.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)view).alpha = 0.0;} completion:^(BOOL finished){[self generateNextQuestion];}];
+                    [UIView animateWithDuration:0.5 delay:1.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 0.0;} completion : ^(BOOL finished){[self prepareNextQuestion];}];
+                }];
             }
             else
             {
@@ -159,9 +179,6 @@ Kana *questionKana;
             }
         }
     }
-    
-    [self prepareNextQuestion];
-
     
     
 }
