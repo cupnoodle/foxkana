@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UtilityButton.h"
 
 @interface QuizViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
@@ -15,4 +16,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *answer_3;
 @property (weak, nonatomic) IBOutlet UIButton *answer_4;
 @property (weak, nonatomic) IBOutlet UILabel *scorelabel;
+
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet UIView *horizontalLine_menuView;
+@property (weak, nonatomic) IBOutlet UIView *verticalLine_menuView;
+
+@property (weak, nonatomic) IBOutlet UtilityButton *backButton;
+
+
 @end

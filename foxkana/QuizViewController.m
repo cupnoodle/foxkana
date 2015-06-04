@@ -68,9 +68,53 @@ Kana *questionKana;
     self.answer_4.layer.shadowRadius = 2;
     self.answer_4.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
     
+    //customize menu view
+    self.menuView.layer.cornerRadius = 7;
+    self.menuView.clipsToBounds = YES;
+    self.menuView.layer.masksToBounds = NO;
+    self.menuView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.menuView.layer.shadowOpacity = 0.5;
+    self.menuView.layer.shadowRadius = 7;
+    self.menuView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    
+    //customize horizontal line inside menu view
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
+    NSNumber *stopTwo = [NSNumber numberWithFloat:0.5];
+    NSNumber *stopThree     = [NSNumber numberWithFloat:1.0];
+    NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, stopThree, nil];
+
+    gradient.frame = self.horizontalLine_menuView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, [UIColor colorWithWhite:0.762 alpha:1.000].CGColor, [UIColor whiteColor].CGColor, nil];
+    gradient.locations = locations;
+    //make the gradient horizontal, iOS by default is vertical
+    gradient.startPoint = CGPointMake(0,0);
+    gradient.endPoint = CGPointMake(1.0, 0);
+    [self.horizontalLine_menuView.layer insertSublayer:gradient atIndex:0];
+    
+    //customize vertical line
+    gradient = [CAGradientLayer layer];
+    stopOne = [NSNumber numberWithFloat:0.2];
+    stopTwo = [NSNumber numberWithFloat:1.0];
+    locations = [NSArray arrayWithObjects:stopOne, stopTwo, nil];
+    gradient.frame = self.verticalLine_menuView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:0.762 alpha:1.000].CGColor, [UIColor whiteColor].CGColor, nil];
+    gradient.locations = locations;
+    [self.verticalLine_menuView.layer insertSublayer:gradient atIndex:0];
+    
+    
+    
+    
     [self generateNextQuestion];
 }
 
+- (void)viewDidLayoutSubviews{
+    //move menu view to bottom
+    self.menuView.frame = CGRectMake(self.menuView.frame.origin.x, self.view.frame
+                                     .size.height, self.menuView.frame.size.width, self.menuView.frame.size.height);
+    
+    NSLog(@"height is around %f", self.view.frame.size.height);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -127,7 +171,7 @@ Kana *questionKana;
     //fade in all buttons and question label
     for (UIView *view in self.view.subviews)
     {
-        if([view isMemberOfClass:[UIButton class]])
+        if([view isMemberOfClass:[UIButton class]] && ![view isMemberOfClass:[UtilityButton class]])
         {
             [(UIButton *)view setEnabled:YES];
             [(UIButton *)view setBackgroundColor:[UIColor whiteColor]];
@@ -155,7 +199,7 @@ Kana *questionKana;
     
     for (UIView *view in self.view.subviews)
     {
-        if([view isMemberOfClass:[UIButton class]])
+        if([view isMemberOfClass:[UIButton class]] && ![view isMemberOfClass:[UtilityButton class]])
         {
             [(UIButton *)view setEnabled:NO];
             
@@ -180,6 +224,21 @@ Kana *questionKana;
         }
     }
     
+    
+}
+
+- (IBAction)backButtonPressed:(id)sender {
+    //disable all answer button
+    [self.answer_1 setEnabled: NO];
+    [self.answer_2 setEnabled: NO];
+    [self.answer_3 setEnabled: NO];
+    [self.answer_4 setEnabled: NO];
+    
+    //move menu view to center
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.menuView.frame = CGRectMake(self.menuView.frame.origin.x, (self.view.frame.size.height - self.menuView.frame.size.height)/2.0, self.menuView.frame.size.width, self.menuView.frame.size.height);
+    } completion:^(BOOL finished){
+        }];
     
 }
 

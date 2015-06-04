@@ -20,6 +20,7 @@
 		0696FDE51B1D71D200E6530E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0696FDE31B1D71D200E6530E /* LaunchScreen.xib */; };
 		0696FDF11B1D71D200E6530E /* foxkanaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696FDF01B1D71D200E6530E /* foxkanaTests.m */; };
 		06B445DE1B1EF96B00120917 /* ShuffleMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */; };
+		06B669501B202E7200A7E85D /* UtilityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B6694F1B202E7200A7E85D /* UtilityButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		0696FDF01B1D71D200E6530E /* foxkanaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foxkanaTests.m; sourceTree = "<group>"; };
 		06B445DC1B1EF96B00120917 /* ShuffleMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuffleMutableArray.h; sourceTree = "<group>"; };
 		06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuffleMutableArray.m; sourceTree = "<group>"; };
+		06B6694E1B202E7200A7E85D /* UtilityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityButton.h; sourceTree = "<group>"; };
+		06B6694F1B202E7200A7E85D /* UtilityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				0660E3F01B1EC8AB00D60053 /* Kana.m */,
 				06B445DC1B1EF96B00120917 /* ShuffleMutableArray.h */,
 				06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */,
+				06B6694E1B202E7200A7E85D /* UtilityButton.h */,
+				06B6694F1B202E7200A7E85D /* UtilityButton.m */,
 			);
 			path = foxkana;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				0696FDDA1B1D71D200E6530E /* AppDelegate.m in Sources */,
 				0696FDD71B1D71D200E6530E /* main.m in Sources */,
 				06B445DE1B1EF96B00120917 /* ShuffleMutableArray.m in Sources */,
+				06B669501B202E7200A7E85D /* UtilityButton.m in Sources */,
 				0667438E1B1DBB7A00AD3BDB /* QuizViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
