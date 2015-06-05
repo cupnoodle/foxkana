@@ -12,6 +12,8 @@
 		0667438B1B1DBB0100AD3BDB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0667438A1B1DBB0100AD3BDB /* Realm.framework */; };
 		0667438E1B1DBB7A00AD3BDB /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0667438D1B1DBB7A00AD3BDB /* QuizViewController.m */; };
 		066743901B1DBD0B00AD3BDB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0667438F1B1DBD0B00AD3BDB /* libc++.dylib */; };
+		0690A6F11B21FA3900D39047 /* learnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0690A6F01B21FA3900D39047 /* learnViewController.m */; };
+		0690A6F41B21FF9800D39047 /* KanaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0690A6F31B21FF9800D39047 /* KanaCollectionViewCell.m */; };
 		0696FDD71B1D71D200E6530E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696FDD61B1D71D200E6530E /* main.m */; };
 		0696FDDA1B1D71D200E6530E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696FDD91B1D71D200E6530E /* AppDelegate.m */; };
 		0696FDDD1B1D71D200E6530E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696FDDC1B1D71D200E6530E /* ViewController.m */; };
@@ -21,6 +23,8 @@
 		0696FDF11B1D71D200E6530E /* foxkanaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0696FDF01B1D71D200E6530E /* foxkanaTests.m */; };
 		06B445DE1B1EF96B00120917 /* ShuffleMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */; };
 		06B669501B202E7200A7E85D /* UtilityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B6694F1B202E7200A7E85D /* UtilityButton.m */; };
+		06B8A5C71B20986A00B234F8 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B8A5C61B20986A00B234F8 /* ResultViewController.m */; };
+		06C8175E1B21AF21001A9186 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C8175D1B21AF21001A9186 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,10 @@
 		0667438C1B1DBB7A00AD3BDB /* QuizViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuizViewController.h; sourceTree = "<group>"; };
 		0667438D1B1DBB7A00AD3BDB /* QuizViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuizViewController.m; sourceTree = "<group>"; };
 		0667438F1B1DBD0B00AD3BDB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		0690A6EF1B21FA3900D39047 /* learnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = learnViewController.h; sourceTree = "<group>"; };
+		0690A6F01B21FA3900D39047 /* learnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = learnViewController.m; sourceTree = "<group>"; };
+		0690A6F21B21FF9800D39047 /* KanaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KanaCollectionViewCell.h; sourceTree = "<group>"; };
+		0690A6F31B21FF9800D39047 /* KanaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KanaCollectionViewCell.m; sourceTree = "<group>"; };
 		0696FDD11B1D71D200E6530E /* foxkana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foxkana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0696FDD51B1D71D200E6530E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0696FDD61B1D71D200E6530E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -58,6 +66,9 @@
 		06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuffleMutableArray.m; sourceTree = "<group>"; };
 		06B6694E1B202E7200A7E85D /* UtilityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityButton.h; sourceTree = "<group>"; };
 		06B6694F1B202E7200A7E85D /* UtilityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityButton.m; sourceTree = "<group>"; };
+		06B8A5C51B20986A00B234F8 /* ResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultViewController.h; sourceTree = "<group>"; };
+		06B8A5C61B20986A00B234F8 /* ResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultViewController.m; sourceTree = "<group>"; };
+		06C8175D1B21AF21001A9186 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06C8175E1B21AF21001A9186 /* QuartzCore.framework in Frameworks */,
 				066743901B1DBD0B00AD3BDB /* libc++.dylib in Frameworks */,
 				0667438B1B1DBB0100AD3BDB /* Realm.framework in Frameworks */,
 			);
@@ -83,6 +95,7 @@
 		0696FDC81B1D71D200E6530E = {
 			isa = PBXGroup;
 			children = (
+				06C8175D1B21AF21001A9186 /* QuartzCore.framework */,
 				0667438F1B1DBD0B00AD3BDB /* libc++.dylib */,
 				0696FDD31B1D71D200E6530E /* foxkana */,
 				0696FDED1B1D71D200E6530E /* foxkanaTests */,
@@ -120,6 +133,12 @@
 				06B445DD1B1EF96B00120917 /* ShuffleMutableArray.m */,
 				06B6694E1B202E7200A7E85D /* UtilityButton.h */,
 				06B6694F1B202E7200A7E85D /* UtilityButton.m */,
+				06B8A5C51B20986A00B234F8 /* ResultViewController.h */,
+				06B8A5C61B20986A00B234F8 /* ResultViewController.m */,
+				0690A6EF1B21FA3900D39047 /* learnViewController.h */,
+				0690A6F01B21FA3900D39047 /* learnViewController.m */,
+				0690A6F21B21FF9800D39047 /* KanaCollectionViewCell.h */,
+				0690A6F31B21FF9800D39047 /* KanaCollectionViewCell.m */,
 			);
 			path = foxkana;
 			sourceTree = "<group>";
@@ -254,10 +273,13 @@
 				0660E3F11B1EC8AB00D60053 /* Kana.m in Sources */,
 				0696FDDD1B1D71D200E6530E /* ViewController.m in Sources */,
 				0696FDDA1B1D71D200E6530E /* AppDelegate.m in Sources */,
+				0690A6F41B21FF9800D39047 /* KanaCollectionViewCell.m in Sources */,
 				0696FDD71B1D71D200E6530E /* main.m in Sources */,
 				06B445DE1B1EF96B00120917 /* ShuffleMutableArray.m in Sources */,
 				06B669501B202E7200A7E85D /* UtilityButton.m in Sources */,
 				0667438E1B1DBB7A00AD3BDB /* QuizViewController.m in Sources */,
+				0690A6F11B21FA3900D39047 /* learnViewController.m in Sources */,
+				06B8A5C71B20986A00B234F8 /* ResultViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

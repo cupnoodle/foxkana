@@ -23,5 +23,9 @@
 
 @property (weak, nonatomic) IBOutlet UtilityButton *backButton;
 
+@property (weak, nonatomic) IBOutlet UIView *blackView;
+
+@property (weak, nonatomic) IBOutlet UtilityButton *yesButton;
+@property (weak, nonatomic) IBOutlet UtilityButton *noButton;
 
 @end

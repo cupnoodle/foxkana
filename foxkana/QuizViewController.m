@@ -7,6 +7,7 @@
 //
 
 #import "QuizViewController.h"
+#import "ResultViewController.h"
 #import <Realm/Realm.h>
 #import "Kana.h"
 #import "ShuffleMutableArray.h"
@@ -21,15 +22,19 @@ NSNumber *chosenNumber;
 NSMutableArray *wrongKanaArray;
 NSMutableArray *mixedKanaArray;
 Kana *questionKana;
+int score;
+int numberOfQuestionAsked;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    score = 0;
+    numberOfQuestionAsked = 0;
     
-    questionIndexes = [[NSMutableArray alloc] initWithCapacity:46];
-    for(int i=1; i<=46; i++)
+    questionIndexes = [[NSMutableArray alloc] initWithCapacity:71];
+    for(int i=1; i<=71; i++)
     {
         [questionIndexes addObject:[NSNumber numberWithInt:i]] ;
     }
@@ -76,6 +81,7 @@ Kana *questionKana;
     self.menuView.layer.shadowOpacity = 0.5;
     self.menuView.layer.shadowRadius = 7;
     self.menuView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+
     
     //customize horizontal line inside menu view
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -83,14 +89,17 @@ Kana *questionKana;
     NSNumber *stopTwo = [NSNumber numberWithFloat:0.5];
     NSNumber *stopThree     = [NSNumber numberWithFloat:1.0];
     NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, stopThree, nil];
-
+    /*
+    [self.horizontalLine_menuView setTranslatesAutoresizingMaskIntoConstraints:YES];
     gradient.frame = self.horizontalLine_menuView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[UIColor whiteColor].CGColor, [UIColor colorWithWhite:0.762 alpha:1.000].CGColor, [UIColor whiteColor].CGColor, nil];
     gradient.locations = locations;
     //make the gradient horizontal, iOS by default is vertical
     gradient.startPoint = CGPointMake(0,0);
     gradient.endPoint = CGPointMake(1.0, 0);
+
     [self.horizontalLine_menuView.layer insertSublayer:gradient atIndex:0];
+    */
     
     //customize vertical line
     gradient = [CAGradientLayer layer];
@@ -102,16 +111,24 @@ Kana *questionKana;
     gradient.locations = locations;
     [self.verticalLine_menuView.layer insertSublayer:gradient atIndex:0];
     
+    //customize black view
+    self.blackView.hidden = YES;
+    self.blackView.alpha = 0.0;
     
-    
-    
+    //set score to zero
+    score = 0;
+    self.scorelabel.text = [NSString stringWithFormat:@"%i", score];
     [self generateNextQuestion];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"Kana available count %i", (int)[questionIndexes count]);
 }
 
 - (void)viewDidLayoutSubviews{
     //move menu view to bottom
     self.menuView.frame = CGRectMake(self.menuView.frame.origin.x, self.view.frame
-                                     .size.height, self.menuView.frame.size.width, self.menuView.frame.size.height);
+                                     .size.height + 10, self.menuView.frame.size.width, self.menuView.frame.size.height);
     
     NSLog(@"height is around %f", self.view.frame.size.height);
 }
@@ -121,6 +138,11 @@ Kana *questionKana;
 }
 
 - (void)generateNextQuestion {
+    if(numberOfQuestionAsked >= 2)
+    {
+        [self performSegueWithIdentifier:@"showResultSegue" sender:self];
+    }
+    
     NSString *kanaRealmPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"kana.realm"];
     NSError *error;
     //[RLMRealm setDefaultRealmPath: kanaRealmPath];
@@ -162,7 +184,7 @@ Kana *questionKana;
     [self.answer_4 setTitle:((Kana *)mixedKanaArray[3]).reading forState:UIControlStateNormal];
     
     self.questionLabel.text = questionKana.hiragana;
-    
+    numberOfQuestionAsked += 1;
     
 }
 
@@ -177,14 +199,19 @@ Kana *questionKana;
             [(UIButton *)view setBackgroundColor:[UIColor whiteColor]];
             [(UIButton *)view setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{view.alpha = 1.0;} completion: nil];
+            
         }
     }
-    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 1.0;} completion: nil];
-
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.questionLabel.alpha = 1.0; self.backButton.alpha = 1.0;} completion: nil];
+    
+    self.backButton.enabled = YES;
+    
     
 }
 
 - (IBAction)answerButtonPressed:(id)sender {
+    self.backButton.enabled = NO;
+    //if wrong or correct
     if(![[sender currentTitle] isEqualToString: questionKana.reading])
     {
         [sender setBackgroundColor: [UIColor colorWithRed:0.633 green:0.100 blue:0.114 alpha:1.000]];
@@ -195,6 +222,8 @@ Kana *questionKana;
     {
         [sender setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
         [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        score += 1;
+        self.scorelabel.text = [NSString stringWithFormat:@"%i", score];
     }
     
     for (UIView *view in self.view.subviews)
@@ -207,7 +236,7 @@ Kana *questionKana;
             {
                 
                 
-                [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{
+                [UIView animateWithDuration:0.75 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{
                     [(UIButton *)view setBackgroundColor: [UIColor colorWithRed:0.032 green:0.399 blue:0.199 alpha:1.000]];
                     [UIView transitionWithView:view duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                         [(UIButton *)view setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -219,7 +248,7 @@ Kana *questionKana;
             }
             else
             {
-                [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)view).alpha = 0.0;} completion: nil];
+                [UIView animateWithDuration:0.5 delay:0.5 options:UIViewAnimationOptionCurveLinear animations:^{((UIButton *)view).alpha = 0.0; self.backButton.alpha = 0.0;} completion: nil];
             }
         }
     }
@@ -229,17 +258,68 @@ Kana *questionKana;
 
 - (IBAction)backButtonPressed:(id)sender {
     //disable all answer button
+    
     [self.answer_1 setEnabled: NO];
     [self.answer_2 setEnabled: NO];
     [self.answer_3 setEnabled: NO];
     [self.answer_4 setEnabled: NO];
     
-    //move menu view to center
+    
+    self.blackView.hidden = NO;
+    //move menu view to center and show black background
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.menuView.frame = CGRectMake(self.menuView.frame.origin.x, (self.view.frame.size.height - self.menuView.frame.size.height)/2.0, self.menuView.frame.size.width, self.menuView.frame.size.height);
+        
+        self.blackView.alpha = 0.85;
+        
     } completion:^(BOOL finished){
         }];
+
+}
+
+- (IBAction)noButtonPressed:(id)sender {
+    //enable all answer button
+    [self.answer_1 setEnabled: YES];
+    [self.answer_2 setEnabled: YES];
+    [self.answer_3 setEnabled: YES];
+    [self.answer_4 setEnabled: YES];
     
+    //move menu view to bottom and hide black background
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.menuView.frame = CGRectMake(self.menuView.frame.origin.x, self.view.frame.size.height + 10 , self.menuView.frame.size.width, self.menuView.frame.size.height);
+        self.blackView.alpha = 0.0;
+        
+    } completion:^(BOOL finished){
+        self.blackView.hidden = YES;
+    }];
+    
+}
+
+- (IBAction)yesButtonPressed:(id)sender {
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showResultSegue"]){
+        ResultViewController *rcontroller = (ResultViewController *)segue.destinationViewController;
+        rcontroller.score = score;
+    }
+}
+
+- (IBAction)unwindToQuizView:(UIStoryboardSegue *)unwindSegue
+{
+    //reset score and questions
+    score = 0;
+    numberOfQuestionAsked = 0;
+    
+    questionIndexes = [[NSMutableArray alloc] initWithCapacity:46];
+    for(int i=1; i<=46; i++)
+    {
+        [questionIndexes addObject:[NSNumber numberWithInt:i]] ;
+    }
+    
+    self.scorelabel.text = [NSString stringWithFormat:@"%i", score];
+    [self generateNextQuestion];
 }
 
 /*
